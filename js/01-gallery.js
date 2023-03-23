@@ -62,7 +62,7 @@ function onGalleryContainerClick(event) {
     instance.show();
   }
     // Close modal window on Escape key press
-    document.addEventListener("Keydown", (event) => {
+    gallery.addEventListener("Keydown", (event) => {
       const instance = basicLightbox.getInstance();
         if (event.key === "Escape" && instance.visible()) {
             instance.close();
