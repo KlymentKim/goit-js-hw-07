@@ -60,4 +60,11 @@ function onGalleryContainerClick(event) {
         `<img src= "${imageSet}" width="800" heigth="600"`
     );
     instance.show();
+
+    //закриття 
+    ul.addEventListener("Keydown", (event) => {
+        if (event.code === "Escape") {
+            instance.close();
+        }
+    });
 }
