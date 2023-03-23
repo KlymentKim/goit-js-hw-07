@@ -19,15 +19,15 @@ console.log(galleryItems);
 // Створити функцію для рендерингу розмітки на основі масиву даних galleryItems 
 // та шаблону елемента галереї.Функція повинна додати розмітку до елементу з класом gallery на сторінці.
 
-const galleryContainer = document.querySelector('.gallery');
+const ul = document.querySelector('.gallery');
 
 function createGalleryMarkup(items) {
-  return items.map(({ preview, original, description }) => {
-    return `
-      <li class="gallery__item">
-        <a class="gallery__link" href="${original}">
+  return items.reduce((acc, { preview, original, description }) => {
+    return acc + `
+      <li class="gallery-item">
+        <a class="gallery-link" href="${original}">
           <img
-            class="gallery__image"
+            class="gallery-image"
             src="${preview}"
             data-source="${original}"
             alt="${description}"
@@ -35,37 +35,29 @@ function createGalleryMarkup(items) {
         </a>
       </li>
     `;
-  }).join('');
+  },'');
 }
+// add array images to html
+ul.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems));
 
-galleryContainer.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems));
 
-// Відслідковувати подію кліку на елементі галереї з використанням делегування.Якщо подія відбувається на елементі 
-// з класом gallery__image,
-// необхідно запобігти дії за замовчуванням та отримати URL оригінального зображення з атрибута data - source.
-
-galleryContainer.addEventListener('click', onGalleryContainerClick);
+ul.addEventListener('click', onGalleryContainerClick);
 
 function onGalleryContainerClick(event) {
-  event.preventDefault();
+    event.preventDefault();
+    //блокування ввідкриття браузером силки 
+    event.blockStandartAction();
 
-  const galleryImageEl = event.target;
-  if (galleryImageEl.nodeName !== 'IMG' || !galleryImageEl.classList.contains('gallery__image')) {
-    return;
-  }
+    const isGalleryImage = event.target;
+    if (isGalleryImage.nodeName !== 'IMG' || !isGalleryImage.classList.contains('gallery-image')) {
+        return;
+    }
+    
 
-  const originalImageUrl = galleryImageEl.dataset.source;
-  openModal(originalImageUrl);
+    const imageSet = event.target.dataset.source;
+    // відкриття картинки на повний єкран бібліотека Lightbox
+    const instance = basiclightbox.create(
+        `<img src= "${imageSet}" width="800" heigth="600"`
+    );
+    instance.show();
 }
-
-
-// Підключити до HTML-сторінки мініфіковані файли бібліотеки basicLightbox за допомогою CDN-сервісу jsdelivr.
-
-// <!-- Підключення стилів бібліотеки basicLightbox -->
-// <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basiclightbox/dist/basicLightbox.min.css">
-
-// <!-- Підключення скрипту бібліотеки basicLightbox -->
-// <script src="https://cdn.jsdelivr.net/npm/basiclightbox/dist/basicLightbox.min.js"></script>
-
-// Створити функцію openModal, яка відкриває модальне вікно з оригінальним зображенням.Функція повинна замінити значення атрибута 
-// src у вбудованому зображенні на URL оригінального зображення та відкрит
