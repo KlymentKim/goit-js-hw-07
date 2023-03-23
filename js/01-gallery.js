@@ -1,17 +1,18 @@
 import { galleryItems } from './gallery-items.js';
-import * as basicLightbox from 'basiclightbox';
-// Change code below this line
-// const basicLightbox = require('basiclightbox');
-
-const ul = document.querySelectorAll('ul.gallery');
-console.log(ul);
-
-
-
-const instance = basicLightbox.create(
-    // `<img src="assets/images/image.png" width="800" height="600">`)
-    // document.querySelector()
-)
-instance.show()
-
 console.log(galleryItems);
+// Change code below this line
+
+const ul = document.querySelector('.gallery');
+console.log(ul);
+const gallery = galleryItems.reduce((acc, { preview, original, description }) =>
+acc + `<li><img src = "${preview}", "${original}", alt = "${description}"</li>`,'');
+
+ ul.insertAdjacentHTML(`beforeend`, gallery);
+
+
+// const instance = basicLightbox.create(
+//     // `<img src="assets/images/image.png" width="800" height="600">`)
+//     // document.querySelector()
+// ).show();
+
+
