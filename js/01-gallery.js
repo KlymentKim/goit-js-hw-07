@@ -19,7 +19,7 @@ console.log(galleryItems);
 // Створити функцію для рендерингу розмітки на основі масиву даних galleryItems 
 // та шаблону елемента галереї.Функція повинна додати розмітку до елементу з класом gallery на сторінці.
 
-const ul = document.querySelector('.gallery');
+const gallery = document.querySelector('.gallery');
 
 function createGalleryMarkup(items) {
   return items.reduce((acc, { preview, original, description }) => {
@@ -37,34 +37,34 @@ function createGalleryMarkup(items) {
     `;
   },'');
 }
-// add array images to html
-ul.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems));
+// Add gallery items to the DOM
+gallery.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems));
 
-ul.addEventListener('click', onGalleryContainerClick);
+gallery.addEventListener('click', onGalleryContainerClick);
 
 
-// function onGalleryContainerClick(event) {
-//     event.preventDefault();
-//     //блокування ввідкриття браузером силки 
-//     event.blockStandartAction();
+function onGalleryContainerClick(event) {
+     event.preventDefault();
+    //блокування ввідкриття браузером силки 
+    // event.blockStandartAction();
 
-//     const isGalleryImage = event.target;
-//     if (isGalleryImage.nodeName !== 'IMG' || !isGalleryImage.classList.contains('gallery-image')) {
-//         return;
-//     }
+    const isGalleryImage = event.target;
+    if (isGalleryImage.nodeName !== 'IMG' || !isGalleryImage.classList.contains('gallery-image')) {
+        return;
+    }
     
-
-//     const imageSet = event.target.dataset.source;
-//     // відкриття картинки на повний єкран бібліотека Lightbox
-//     const instance = basiclightbox.create(
-//         `<img src= "${imageSet}" width="800" heigth="600"`
-//     );
-//     instance.show();
-
-//     //закриття 
-//     ul.addEventListener("Keydown", (event) => {
-//         if (event.code === "Escape") {
-//             instance.close();
-//         }
-//     });
-// }
+    const imageSet = event.target.dataset.source;
+    // відкриття картинки на повний єкран бібліотека Lightbox
+    const instance = basicLightbox.create(`
+    <img src="${imageSet}" alt="${isGalleryImage.alt}" width = "900"
+    heigth="700"/>
+    `);
+    instance.show();
+  }
+    // Close modal window on Escape key press
+    document.addEventListener("Keydown", (event) => {
+      const instance = basicLightbox.getInstance();
+        if (event.key === "Escape" && instance.visible()) {
+            instance.close();
+        }
+    });
