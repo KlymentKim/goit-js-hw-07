@@ -45,21 +45,20 @@ gallery.addEventListener('click', onGalleryContainerClick);
 
 function onGalleryContainerClick(event) {
      event.preventDefault();
-    //блокування ввідкриття браузером силки 
-    // event.blockStandartAction();
-
+    
+  //check for image
     const isGalleryImage = event.target;
     if (isGalleryImage.nodeName !== 'IMG' || !isGalleryImage.classList.contains('gallery-image')) {
         return;
     }
     
-    const imageSet = event.target.dataset.source;
-    // відкриття картинки на повний єкран бібліотека Lightbox
-  //   const instance = basicLightbox.create(`
+   
+    //   const instance = basicLightbox.create(`
   //   <img src="${imageSet}" alt="${isGalleryImage.alt}" width="1200" height="800">
   //   `);
+  const imageSet = event.target.dataset.source;
   // instance.show();
-  
+    // відкриття картинки на повний єкран бібліотека Lightbox
   const instance = basicLightbox.create(`
     <img src="${imageSet}" alt="${isGalleryImage.alt}" />`, {
   onShow: (instance) => {
@@ -80,9 +79,8 @@ instance.show();
 
   }
     // Close modal window on Escape key press
-    gallery.addEventListener("Keydown", (event) => {
+    document.addEventListener("close", (event) => {
       const instance = basicLightbox.getInstance();
-        if (event.key === "Escape" && instance.visible()) {
-            instance.close();
-        }
+        if (event.key === 'Escape' || event.code === "Esc" && instance.visible())          
+          instance.close();
     });
