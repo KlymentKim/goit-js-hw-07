@@ -4,7 +4,7 @@ console.log(galleryItems);
 const gallery = document.querySelector('.gallery');
 
 function createGalleryMarkup(items) {
-  return items.map((acc, { preview, original, description }) => {
+  return items.map(({ preview, original, description }) => {
     return `
       <li class="gallery-item">
         <a class="gallery-link" href="${original}">
