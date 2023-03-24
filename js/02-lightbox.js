@@ -4,8 +4,8 @@ console.log(galleryItems);
 const gallery = document.querySelector('.gallery');
 
 function createGalleryMarkup(items) {
-  return items.reduce((acc, { preview, original, description }) => {
-    return acc + `
+  return items.map((acc, { preview, original, description }) => {
+    return `
       <li class="gallery-item">
         <a class="gallery-link" href="${original}">
           <img
@@ -17,7 +17,7 @@ function createGalleryMarkup(items) {
         </a>
       </li>
     `;
-  },'');
+  }).join("");
 }
 // Add gallery items to the DOM
 gallery.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems));
