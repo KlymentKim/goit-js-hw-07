@@ -2,20 +2,6 @@ import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 // Change code below this line
 
-// const ul = document.querySelector('.gallery');
-// console.log(ul);
-// const gallery = galleryItems.reduce((acc, { preview, original, description }) =>
-// acc + `<li><img src = "${preview}", "${original}", alt = "${description}"</li>`,'');
-
-//  ul.insertAdjacentHTML(`beforeend`, gallery);
-
-
-// const instance = basicLightbox.create(
-//     // `<img src="assets/images/image.png" width="800" height="600">`)
-//     // document.querySelector()
-// ).show();
-
-
 // Створити функцію для рендерингу розмітки на основі масиву даних galleryItems 
 // та шаблону елемента галереї.Функція повинна додати розмітку до елементу з класом gallery на сторінці.
 
@@ -46,18 +32,14 @@ gallery.addEventListener('click', onGalleryContainerClick);
 function onGalleryContainerClick(event) {
      event.preventDefault();
     
-  //check for image
+    //check for image 
     const isGalleryImage = event.target;
     if (isGalleryImage.nodeName !== 'IMG' || !isGalleryImage.classList.contains('gallery-image')) {
         return;
     }
     
-   
-    //   const instance = basicLightbox.create(`
-  //   <img src="${imageSet}" alt="${isGalleryImage.alt}" width="1200" height="800">
-  //   `);
   const imageSet = event.target.dataset.source;
-  // instance.show();
+  
     // відкриття картинки на повний єкран бібліотека Lightbox
   const instance = basicLightbox.create(`
     <img src="${imageSet}" alt="${isGalleryImage.alt}" />`, {
@@ -73,14 +55,19 @@ function onGalleryContainerClick(event) {
       image.style.left = leftOffset + 'px';
       image.style.top = topOffset + 'px';
     };
-  }
-});
-instance.show();
+    }
+      
+  });
+  instance.show();
 
-  }
     // Close modal window on Escape key press
-    document.addEventListener("close", (event) => {
-      const instance = basicLightbox.getInstance();
-        if (event.key === 'Escape' || event.code === "Esc" && instance.visible())          
-          instance.close();
-    });
+  document.addEventListener("keydown", (event) => {
+        if (event.key == 27 || event.key === 'Escape' || event.visible())
+      instance.close();
+  });
+}
+  
+
+   //   const instance = basicLightbox.create(`
+  //   <img src="${imageSet}" alt="${isGalleryImage.alt}" width="1200" height="800">
+  //   `);
