@@ -28,11 +28,10 @@ gallery.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems));
 
 gallery.addEventListener('click', onGalleryContainerClick);
 
-
+//check for image 
 function onGalleryContainerClick(event) {
      event.preventDefault();
-    
-    //check for image 
+       
     const isGalleryImage = event.target;
     if (isGalleryImage.nodeName !== 'IMG' || !isGalleryImage.classList.contains('gallery-image')) {
         return;
