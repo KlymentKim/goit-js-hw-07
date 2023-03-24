@@ -55,11 +55,29 @@ function onGalleryContainerClick(event) {
     
     const imageSet = event.target.dataset.source;
     // відкриття картинки на повний єкран бібліотека Lightbox
-    const instance = basicLightbox.create(`
-    <img src="${imageSet}" alt="${isGalleryImage.alt}" width = "900"
-    heigth="700"/>
-    `);
-    instance.show();
+  //   const instance = basicLightbox.create(`
+  //   <img src="${imageSet}" alt="${isGalleryImage.alt}" width="1200" height="800">
+  //   `);
+  // instance.show();
+  
+  const instance = basicLightbox.create(`
+    <img src="${imageSet}" alt="${isGalleryImage.alt}" />`, {
+  onShow: (instance) => {
+    const image = instance.element().querySelectorAll('img');
+    image.onload = () => {
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      const imageWidth = image.width;
+      const imageHeight = image.height;
+      const leftOffset = (windowWidth - imageWidth)/2;
+      const topOffset = (windowHeight - imageHeight)/2;
+      image.style.left = leftOffset + 'px';
+      image.style.top = topOffset + 'px';
+    };
+  }
+});
+instance.show();
+
   }
     // Close modal window on Escape key press
     gallery.addEventListener("Keydown", (event) => {
