@@ -1,7 +1,32 @@
 import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
 // Change code below this line
-const gallery = document.querySelector('.gallery');
+ const lightbox = new SimpleLightbox('.gallery a', {
+    captions: true,
+    captionDelay: 250,
+    closeBtnCaption: 'Close',
+    nextBtnCaption: 'Next',
+    prevBtnCaption: 'Previous',
+    loadingCaption: 'Loading...',
+        });
+
+
+
+// Go to next image
+lightbox.next();
+
+// Go to previous image
+lightbox.prev();
+
+// Close lightbox
+lightbox.close();
+
+// Destroy lightbox (does close and removes all $items click handlers)
+lightbox.destroy();
+
+// Open lightbox
+lightbox.show();
+
 
 function createGalleryMarkup(items) {
   return items.map(({ preview, original, description }) => {
@@ -34,10 +59,8 @@ function onGalleryContainerClick(event) {
         return;
     }
 
-        // const gallery = new SimpleLightbox('.gallery a', {
-        // captions: true,
-        // captionDelay: 250,
-        // });
+     
 
 
 }
+
