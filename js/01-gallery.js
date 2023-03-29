@@ -25,48 +25,29 @@ function createGalleryMarkup(items) {
 }
 // Add gallery items to the DOM
 gallery.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems));
-
 gallery.addEventListener('click', onGalleryContainerClick);
 
-//check for image 
 function onGalleryContainerClick(event) {
      event.preventDefault();
-       
+   
     const isGalleryImage = event.target;
+
+     // перевірка якщо це фото
     if (isGalleryImage.nodeName !== 'IMG' || !isGalleryImage.classList.contains('gallery-image')) {
         return;
     }
     
-  const imageSet = event.target.dataset.source;
-  
+    const imageSet = event.target.dataset.source;
     // відкриття картинки на повний єкран бібліотека Lightbox
   const instance = basicLightbox.create(`
     <img src="${imageSet}" alt="${isGalleryImage.alt}" />`, {
-  onShow: (instance) => {
-    const image = instance.element().querySelectorAll('img');
-    image.onload = () => {
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
-      const imageWidth = image.width;
-      const imageHeight = image.height;
-      const leftOffset = (windowWidth - imageWidth)/2;
-      const topOffset = (windowHeight - imageHeight)/2;
-      image.style.left = leftOffset + 'px';
-      image.style.top = topOffset + 'px';
-    };
-    }
-      
+
   });
   instance.show();
 
     // Close modal window on Escape key press
   document.addEventListener("keydown", (event) => {
-        if (event.key == 27 || event.key === 'Escape' || event.visible())
-      instance.close();
+       if (event.key == 'Escape')
+        instance.close();
   });
 }
-  
-
-   //   const instance = basicLightbox.create(`
-  //   <img src="${imageSet}" alt="${isGalleryImage.alt}" width="1200" height="800">
-  //   `);
