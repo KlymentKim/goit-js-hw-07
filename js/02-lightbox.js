@@ -1,16 +1,15 @@
 import { galleryItems } from './gallery-items.js';
 console.log(galleryItems);
+
 // Change code below this line
  const lightbox = new SimpleLightbox('.gallery a', {
     captions: true,
     captionDelay: 250,
-    closeBtnCaption: 'Close',
-    nextBtnCaption: 'Next',
-    prevBtnCaption: 'Previous',
-    loadingCaption: 'Loading...',
+    // closeBtnCaption: 'Close',
+    // nextBtnCaption: 'Next',
+    // prevBtnCaption: 'Previous',
+    // loadingCaption: 'Loading...',
         });
-
-
 
 // Go to next image
 lightbox.next();
@@ -26,7 +25,6 @@ lightbox.destroy();
 
 // Open lightbox
 lightbox.show();
-
 
 function createGalleryMarkup(items) {
   return items.map(({ preview, original, description }) => {
@@ -45,9 +43,9 @@ function createGalleryMarkup(items) {
   }).join("");
 }
 // Add gallery items to the DOM
-gallery.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems));
+lightbox.insertAdjacentHTML('beforeend', createGalleryMarkup);
 
-gallery.addEventListener('click', onGalleryContainerClick);
+lightbox.addEventListener('click', onGalleryContainerClick);
 
 
 //check for image 
@@ -61,6 +59,7 @@ function onGalleryContainerClick(event) {
 
      
 
+  
 
 }
 
