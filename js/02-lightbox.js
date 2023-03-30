@@ -27,4 +27,5 @@ const lightbox = new SimpleLightbox('.gallery a', {
       prevBtnCaption: 'Previous',
       loadingCaption: 'Loading...',
 });
+gallery.next();
 
