@@ -1,5 +1,5 @@
 import { galleryItems } from './gallery-items.js';
-console.log(galleryItems);
+// console.log(galleryItems);
 // Change code below this line
 
 // Створити функцію для рендерингу розмітки на основі масиву даних galleryItems 

@@ -1,15 +1,14 @@
 import { galleryItems } from './gallery-items.js';
-import SimpleLightbox from "simplelightbox";
-console.log(galleryItems);
+// console.log(galleryItems);
 // Change code below this line
-//const gallery = document.querySelector('.gallery a');
-const lightbox = new SimpleLightbox('.gallery a', {
-    captions: true,
-    captionDelay: 250,
-    closeBtnCaption: 'Close',
-    nextBtnCaption: 'Next',
-    prevBtnCaption: 'Previous',
-    loadingCaption: 'Loading...',
+const gallery = document.querySelector('.gallery');
+const lightbox = new SimpleLightbox('.gallery a', { 
+      captions: true,
+      captionDelay: 250,
+      closeBtnCaption: 'Close',
+      nextBtnCaption: 'Next',
+      prevBtnCaption: 'Previous',
+      loadingCaption: 'Loading...',
 });
 
 function createGalleryMarkup(items) {
