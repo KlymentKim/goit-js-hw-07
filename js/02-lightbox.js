@@ -2,15 +2,6 @@ import { galleryItems } from './gallery-items.js';
 // console.log(galleryItems);
 // Change code below this line
 const gallery = document.querySelector('.gallery');
-const lightbox = new SimpleLightbox('.gallery a', { 
-      captions: true,
-      captionDelay: 250,
-      closeBtnCaption: 'Close',
-      nextBtnCaption: 'Next',
-      prevBtnCaption: 'Previous',
-      loadingCaption: 'Loading...',
-});
-
 function createGalleryMarkup(items) {
   return items.map(({ preview, original, description}) => {
     return `
@@ -27,3 +18,13 @@ function createGalleryMarkup(items) {
   }).join('');
 }
 gallery.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems));
+
+const lightbox = new SimpleLightbox('.gallery a', { 
+      captions: true,
+      captionDelay: 250,
+      closeBtnCaption: 'Close',
+      nextBtnCaption: 'Next',
+      prevBtnCaption: 'Previous',
+      loadingCaption: 'Loading...',
+});
+
