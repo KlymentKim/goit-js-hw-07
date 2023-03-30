@@ -22,10 +22,12 @@ gallery.insertAdjacentHTML('beforeend', createGalleryMarkup(galleryItems));
 const lightbox = new SimpleLightbox('.gallery a', { 
       captions: true,
       captionDelay: 250,
+      captionsData: 'alt',
       closeBtnCaption: 'Close',
       nextBtnCaption: 'Next',
       prevBtnCaption: 'Previous',
       loadingCaption: 'Loading...',
+    
 });
-gallery.next();
+
 
